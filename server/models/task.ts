@@ -1,0 +1,9 @@
+import { Schema, model} from 'mongoose' // Import mongoose
+
+const taskSchema  = new Schema({ // Create a schema
+    title: {type: String, required: true, trim: true},
+    description: {type: String, required: true, trim: true},
+    done: {type: Boolean, default: false}
+})
+
+export default model('Task', taskSchema) // Export Task model
