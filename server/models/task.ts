@@ -1,9 +1,13 @@
-import { Schema, model} from 'mongoose' // Import mongoose
+import { Schema, model } from "mongoose"; // Import mongoose
 
-const taskSchema  = new Schema({ // Create a schema
-    title: {type: String, required: true, trim: true},
-    description: {type: String, required: true, trim: true},
-    done: {type: Boolean, default: false}
-})
+const taskSchema = new Schema(
+  {
+    // Create a schema
+    title: { type: String, required: true, trim: true },
+    description: { type: String, required: true, trim: true },
+    done: { type: Boolean, default: false },
+  },
+  { versionKey: false } // Disable version key
+);
 
-export default model('Task', taskSchema) // Export Task model
+export default model("Task", taskSchema); // Export Task model
