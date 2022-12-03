@@ -107,6 +107,7 @@ dist
 .DS_Store
 node_modules
 /dist
+/.vscode
 
 
 # local env files
