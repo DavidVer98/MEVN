@@ -13,7 +13,8 @@ router.get("/task", async (req, res) => {
 
 router.post("/task",  async(req, res) => {
     const { title, description } = req.body; // obtenemos los datos del body
-    const tasks = await new Task({title, description}); // creamos una nueva tarea con los datos que nos envian
+    const date: Date = new Date(); // creamos una fecha
+    const tasks = await new Task({title, description, date}); // creamos una nueva tarea con los datos que nos envian
     tasks.save(); // guardamos la tarea en la base de datos
     console.log(tasks) // mostramos la tarea en consola
     res.send(tasks)
