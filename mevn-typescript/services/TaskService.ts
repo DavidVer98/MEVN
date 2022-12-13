@@ -12,6 +12,10 @@ export default class TaskService {
     const { data } = await axiosInstance.get(`/task/${id}`);
     return data;
   }
+  static async getTaskDTO(id: string) {
+    const { data } = await axiosInstance.get(`/taskDTO/${id}`);
+    return data;
+  }
 
   static async createTask(task: Task) {
     console.log("Task in data fron:", task);  
