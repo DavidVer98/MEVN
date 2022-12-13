@@ -39,6 +39,23 @@ try {
 }
 });
 
+router.get("/taskDTO/:id", async (req, res) => {
+    try {
+        console.log("test2.0",req.params.id); // obtenemos el id de la tarea
+        const task = await Task.findById(req.params.id).select({ _id: 0 , done:0, date:0}) ; // obtenemos la tarea de la base de datos
+        console.log("getting task id",task); // mostramos la tarea en consola
+    
+        if(!task) {
+            return res.status(404).json({message:'Task not found'}) // si no se encuentra la tarea enviamos un mensaje de error
+        }
+    
+        res.send(task)
+    } catch (error) {
+        res.status(500).send(error);
+    } 
+
+});
+
 router.delete("/task/:id", async (req, res) => {
     try {
         const task = await Task.findByIdAndDelete(req.params.id).exec(); // obtenemos el id de la tarea y la eliminamos de la base de datos
@@ -57,8 +74,10 @@ router.delete("/task/:id", async (req, res) => {
 
 router.put("/task/:id", async (req, res) => {
     try {
-        const updateTask = await Task.findByIdAndUpdate
-        (req.params.id, req.body, {new:true }) // obtenemos el id de la tarea y la actualizamos con los datos que nos envian
+        const date: Date = new Date();
+        const { title, description }= req.body // obtenemos los datos del body
+        const updateTask = await Task.findByIdAndUpdate( req.params.id, { 'title': title, 'description': description, 'date':date } , {new:true } ) // obtenemos el id de la tarea y la actualizamos con los datos que nos envian
+ 
         console.log(updateTask, "Update.."); // obtenemos el id de la tarea
 
         if(!updateTask) {
